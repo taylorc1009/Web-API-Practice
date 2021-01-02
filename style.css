@@ -1,0 +1,27 @@
+body
+{
+	background-color: gray;
+}
+#title
+{
+	background-color: gray;
+	color: red;
+}
+#institution
+{
+	background-color: gray;
+	color: red;
+	font-size: larger;
+}
+.first
+{
+	background-color: gray;
+	color: white;
+	font-size: larger;
+}
+.second
+{
+	background-color: gray;
+	color: white;
+	font-size: medium;
+}
