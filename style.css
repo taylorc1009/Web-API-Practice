@@ -19,6 +19,7 @@ body {
 #introduction {
 	color: white;
 	font-size: larger;
+	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 }
 .flex-container {
