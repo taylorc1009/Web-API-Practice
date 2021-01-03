@@ -1,25 +1,25 @@
-body
-{
+body {
 	background-color: black;
 }
-#title
-{
-	color: red;
+#title {
+	color: tomato;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
 }
-#institution
-{
-	color: red;
-	font-size: larger;
+#institution {
+	color: tomato;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
 }
-.first
-{
+#icon {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#introduction {
 	color: white;
 	font-size: larger;
-}
-.second
-{
-	color: white;
-	font-size: medium;
+	font-family: Arial, Helvetica, sans-serif;
 }
 .flex-container {
 	padding: 0;
@@ -59,7 +59,7 @@ body
 	background: lightgreen;
 }
 .main {
-	text-align: left;
+	/* text-align: left; */
 	background: deepskyblue;
 }
 .aside-1 {
@@ -91,11 +91,13 @@ body
 .navigation a {
 	text-decoration: none;
 	display: block;
-	padding-right: 20px;
+	padding-right: 10px;
 	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
 }
 .navigation a:hover {
-	color: dodgerblue;
+	color: royalblue;
 }
 @media all and (max-width: 800px) {
 	.navigation {
