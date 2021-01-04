@@ -18,24 +18,11 @@
 
 		<!-- JavaScript Button examples -->
 		<button type="button" onClick="getDateTime();">Get Date and Time</button>
-		<div id="datetime" onMouseOver="changeColour(this, 'red');" onMouseOut="changeColour(this, 'white');"></div>
+		<div id="datetime" onMouseOver="changeColour(this, 'tomato');" onMouseOut="changeColour(this, 'white');"></div>
 
 		<!-- Storage examples -->
 		<script>
-			if(window.confirm('Would you like to test the storage examples?')) { //confirmation prompt example
-				var value = window.prompt('What is your name?');
-				if(value != null) {
-					var name = "username", storage = window.sessionStorage;
-
-					//Cookie example
-					console.log(setCookie(name, value, 2));
-
-					//Storage example
-					storeValue(name, value, storage);
-					console.log("storeValue stored the value: " + storage.getItem(name));
-					console.log("storage removeValue successful = " + removeValue(name, storage));
-				}
-			}
+			storageTest();
 		</script>
 
 		<!-- More CSS-Flex examples -->
