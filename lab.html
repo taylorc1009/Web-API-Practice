@@ -7,15 +7,38 @@
 		<script src="main.js"></script>
 	</head>
 	<body>
+		<!-- CSS-Flex navigation bar -->
 		<ul class="navigation">
 			<li><a href="https://siwells.github.io/set08101/">Link to University Module</a></li>
 		</ul>
+
 		<h1 id="title">Web Tech</h1>
-		<img id="icon" src="https://blogs.napier.ac.uk/student-life/wp-content/uploads/sites/57/2020/02/cropped-ENU-logo-White.png"/>
+		<img id="logo" src="https://blogs.napier.ac.uk/student-life/wp-content/uploads/sites/57/2020/02/cropped-ENU-logo-White.png"/>
 		<p id="introduction">Web Tech is a module that is run in the School of Computing at Edinburgh Napier University. This is a test website based on contents of the module. Anything found within are for experiments with web pages.</p>
-		<p><a href="#" onClick="helloFunction();">Click Me</a></p>
+
+		<!-- JavaScript Button examples -->
 		<button type="button" onClick="getDateTime();">Get Date and Time</button>
 		<div id="datetime" onMouseOver="changeColour(this, 'red');" onMouseOut="changeColour(this, 'white');"></div>
+
+		<!-- Storage examples -->
+		<script>
+			if(window.confirm('Would you like to test the storage examples?')) { //confirmation prompt example
+				var value = window.prompt('What is your name?');
+				if(value != null) {
+					var name = "username", storage = window.sessionStorage;
+
+					//Cookie example
+					console.log(setCookie(name, value, 2));
+
+					//Storage example
+					storeValue(name, value, storage);
+					console.log("storeValue stored the value: " + storage.getItem(name));
+					console.log("storage removeValue successful = " + removeValue(name, storage));
+				}
+			}
+		</script>
+
+		<!-- More CSS-Flex examples -->
 		<section>
 			<ul class ="flex-container">
 				<li class="flex-item">1</li>
