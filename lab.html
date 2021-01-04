@@ -3,6 +3,8 @@
 	<head>
 		<link rel="stylesheet" href="style.css" type="text/css"/>
 		<title>Web Tech Labs</title>
+
+		<script src="main.js"></script>
 	</head>
 	<body>
 		<ul class="navigation">
@@ -11,6 +13,9 @@
 		<h1 id="title">Web Tech</h1>
 		<img id="icon" src="https://blogs.napier.ac.uk/student-life/wp-content/uploads/sites/57/2020/02/cropped-ENU-logo-White.png"/>
 		<p id="introduction">Web Tech is a module that is run in the School of Computing at Edinburgh Napier University. This is a test website based on contents of the module. Anything found within are for experiments with web pages.</p>
+		<p><a href="#" onClick="helloFunction();">Click Me</a></p>
+		<button type="button" onClick="document.getElementById('datetime').innerHTML = Date()">Get Date and Time</button>
+		<p id="datetime"></p>
 		<section>
 			<ul class ="flex-container">
 				<li class="flex-item">1</li>
