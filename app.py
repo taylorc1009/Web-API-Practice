@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
@@ -41,7 +41,7 @@ def create_store_item(name):
 		if store['name'] == name:
 			request_data = request.get_json()
 			new_item = {
-				'name': request_data['name']
+				'name': request_data['name'],
 				'price': request_data['price']
 			}
 			store['items'].append(new_item)
