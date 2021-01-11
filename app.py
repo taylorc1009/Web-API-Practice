@@ -14,6 +14,10 @@ stores = [
 	}
 ]
 
+@app.route('/')
+def home():
+	return render_template('index.html')
+
 @app.route('/store', methods=['POST']) # home directory, "https://www.example.com" becomes "https://www.example.com/"
 def create_store():
 	request_data = request.get_json()
