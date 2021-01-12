@@ -1,7 +1,8 @@
-from flask import Flask, request #, jsonify, render_template
+from flask import Flask, request # Section3(, jsonify, render_template)
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
+app.secret_key = 'taylor'
 api = Api(app)
 
 items = []
