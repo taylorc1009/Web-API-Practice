@@ -1,6 +1,6 @@
 //you may have noticed the 'example.json' file is inactive: to read it, we need a web server (https://stackoverflow.com/a/19706080/11136104)
 
-function httpGetAsync(theUrl, callback) {
+/*function httpGetAsync(theUrl, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -8,7 +8,7 @@ function httpGetAsync(theUrl, callback) {
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.send(null);
-}
+}*/
 
 function getDateTime() {
 	var dateTime = Date();
