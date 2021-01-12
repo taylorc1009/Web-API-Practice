@@ -1,9 +1,14 @@
 from flask import Flask, request # Section3(, jsonify, render_template)
 from flask_restful import Resource, Api
+from flask_jwt import JWT, jwt_required
+
+from security import authenticate, identity
 
 app = Flask(__name__)
 app.secret_key = 'example-key' # at an industrial level, this should be really long and complicated to increase security
 api = Api(app)
+
+jwt = JWT(app, authenticate, identity) # creates a new endpoint '/auth'
 
 items = []
 
@@ -15,20 +20,22 @@ items = []
 # 404 = not found
 
 class Item(Resource):
+	@jwt_required()
 	def get(self, name):
-		item = next(filter(lambda x: x['name'] == name, items), None) # 'next' takes the first value found matching the name (if we found more than one), you can call it again to get the second but you'd need to store the filter response to do so
+		 # 'next' takes the first value found matching the name (if we found more than one), you can call it again to get the second but you'd need to store the filter response to do so
+		item = next(filter(lambda x: x['name'] == name, items), None)
 		# the line above is the same as writing:
 		# for item in items:
 		# 	if item['name'] == name:
 		# 		return items
 
-		return {'item': None}, 200 if item else 404 # returns a 404 not found HTML response if no item was found, otherwise return 200
+		return {'item': item}, 200 if item else 404 # returns a 404 not found HTML response if no item was found, otherwise return 200
 
 	def post(self, name):
 		if next(filter(lambda x: x['name'] == name, items), None):
 			return {'message': "An item with name '{}' already exists.".format(name)}, 400
 
-		request_data = request.get_json(silent=True) # silent causes this method to return None if the data couldn't be parsed as JSON
+		request_data = request.get_json() # silent causes this method to return None if the data couldn't be parsed as JSON
 
 		item = {'name': name, 'price': request_data['price']}
 		items.append(item)
