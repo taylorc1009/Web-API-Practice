@@ -2,7 +2,7 @@ from flask import Flask, request # Section3(, jsonify, render_template)
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
-app.secret_key = 'taylor'
+app.secret_key = 'example-key' # at an industrial level, this should be really long and complicated to increase security
 api = Api(app)
 
 items = []
