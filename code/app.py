@@ -25,7 +25,7 @@ class Item(Resource):
 
 	def post(self, name):
 		if next(filter(lambda x: x['name'] == name, items), None):
-			return {'message': "An item with name '{}' already exists."".format(name)}, 400
+			return {'message': "An item with name '{}' already exists.".format(name)}, 400
 
 		request_data = request.get_json(silent=True) # silent causes this method to return None if the data couldn't be parsed as JSON
 
