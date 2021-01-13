@@ -1,4 +1,5 @@
 import sqlite3
+from flask_restful import Resource, reqparse
 
 class User:
     def __init__(self, _id, username, password):
@@ -29,9 +30,9 @@ class User:
         cursor = connection.cursor()
 
         query = "SELECT * FROM users WHERE id=?"
-        result = cursor.execute(query, (_id,)) # the second paramater gives the paramater the query needs ('?'), which should always be given as a tuple
+        result = cursor.execute(query, (_id,))
 
-        row = result.fetchone() # gets the first returned value
+        row = result.fetchone()
         if row:
             user = cls(*row)
         else:
@@ -39,6 +40,33 @@ class User:
 
         connection.close()
         return user
+
+class UserRegister(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('username',
+        type=str,
+        required=True,
+        help="Field is either blank or unrecognised."
+    )
+    parser.add_argument('password',
+        type=str,
+        required=True,
+        help="Field is either blank or unrecognised."
+    )
+
+    def post(self):
+        request_data = UserRegister.parser.parse_args()
+
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
+
+        query = "INSERT INTO users VALUES(NULL, ?, ?)"
+        cursor.execute(query, (request_data['username'], request_data['password']))
+
+        connection.commit()
+        connection.close()
+
+        return {"message": "User created successfully."}, 201
 
 
 

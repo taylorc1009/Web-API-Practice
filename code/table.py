@@ -4,22 +4,22 @@ connection = sqlite3.connect('data.db') # creates a new file-based database - yo
 
 cursor = connection.cursor()
 
-create_table = "CREATE TABLE users (id int, username text, password text)"
+create_table = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username text, password text)" # 'INTEGER' key word creates an auto incrementing column: we want our IDs to auto increment for each new row
 cursor.execute(create_table)
 
-user = (1, 'jose', 'asdf')
-insert_query = "INSERT INTO users VALUES (?, ?, ?)"
-cursor.execute(insert_query, user)
+# user = (1, 'jose', 'asdf')
+# insert_query = "INSERT INTO users VALUES (?, ?, ?)"
+# cursor.execute(insert_query, user)
 
-users = [
-	(2, 'rolf', 'fdsa'),
-	(3, 'anne', 'xyz')
-]
-cursor.executemany(insert_query, users)
+# users = [
+	# (2, 'rolf', 'fdsa'),
+	# # (3, 'anne', 'xyz')
+# ]
+# cursor.executemany(insert_query, users)
 
-select_query = "SELECT * FROM users"
-for row in cursor.execute(select_query):
-	print(row)
+# select_query = "SELECT * FROM users"
+# for row in cursor.execute(select_query):
+	# print(row)
 
 connection.commit()
 
