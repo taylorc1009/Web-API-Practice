@@ -1,5 +1,5 @@
 from flask import Flask, request # Section3(, jsonify, render_template)
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required
 
 from security import authenticate, identity
@@ -20,6 +20,13 @@ items = []
 # 404 = not found
 
 class Item(Resource):
+	parser = reqparse.RequestParser()
+	parser.add_argument('price',
+		type=float,
+		required=True,
+		help="Field is either blank or unrecognised."
+	) # this is used to make sure that the data being added has the required attributes
+
 	@jwt_required()
 	def get(self, name):
 		 # 'next' takes the first value found matching the name (if we found more than one), you can call it again to get the second but you'd need to store the filter response to do so
@@ -35,7 +42,7 @@ class Item(Resource):
 		if next(filter(lambda x: x['name'] == name, items), None):
 			return {'message': "An item with name '{}' already exists.".format(name)}, 400
 
-		request_data = request.get_json() # silent causes this method to return None if the data couldn't be parsed as JSON
+		request_data = Item.parser.parse_args()
 
 		item = {'name': name, 'price': request_data['price']}
 		items.append(item)
@@ -43,9 +50,22 @@ class Item(Resource):
 		return item, 201
 
 	def delete(self, name):
-		global items
+		global items # we need to tell the method we're using the global 'items' list, otherise it will try to use a new, undefined variable in 'filter()'
 		items = list(filter(lambda x: x['name'] != name, items))
+
 		return {'message': 'Item deleted.'}
+
+	def put(self, name):
+		request_data = Item.parser.parse_args()
+
+		item = next(filter(lambda x: x['name'] == name, items), None)
+		if item is None:
+			item = {'name': name, 'price': request_data['price']}
+			items.append(item)
+		else:
+			item.update(request_data)
+
+		return item
 
 class Items(Resource):
 	def get(self):
@@ -55,7 +75,7 @@ api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
 app.run(port=5000, debug=True) # port is, by default, set to 5000 by REST, so the parameter isn't necessary
 
-## Udemy Section 3
+### Udemy Section 3
 # stores = [
 # 	{
 # 		'name': 'Store Example',
