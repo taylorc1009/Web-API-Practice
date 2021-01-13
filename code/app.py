@@ -1,7 +1,6 @@
 from flask import Flask, request # Section3(, jsonify, render_template)
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required
-
 from security import authenticate, identity
 
 app = Flask(__name__)
