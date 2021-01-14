@@ -53,7 +53,7 @@ class Item(Resource):
             return {"message": "An error occurred while reading the item from the database."}, 500
 
         if item:
-            return item
+            return item, 200
         return {'message': 'Item not found.'}, 404
 
     def post(self, name):
@@ -85,7 +85,7 @@ class Item(Resource):
             connection.close()
         except:
             return {"message": "An error occurred while deleting the item from the database."}, 500
-        return {'message': 'Item deleted.'}
+        return {'message': 'Item deleted.'}, 200
 
     def put(self, name):
         request_data = Item.parser.parse_args()
@@ -106,8 +106,20 @@ class Item(Resource):
                 self.update(updated_item)
             except:
                 return {"message": "An error occurred while updating the item in the database."}, 500
-        return updated_item
+        return updated_item, 200
 
 class Items(Resource):
     def get(self):
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM items"
+        result = cursor.execute(query)
+
+        items = []
+        for row in result:
+            items.append({'name': row[0], 'price': row[1]})
+
+        connection.close()
+
         return {'items': items}
