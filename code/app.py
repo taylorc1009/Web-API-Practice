@@ -15,7 +15,8 @@ api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
 api.add_resource(UserRegister, '/register')
 
-app.run(port=5000, debug=True)
+if __name__ == '__main__': # prevents the server from starting if we're running 'app.py' by importing it
+	app.run(port=5000, debug=True)
 
 
 
@@ -42,7 +43,7 @@ app.run(port=5000, debug=True)
 		# type=float,
 		# required=True,
 		# help="Field is either blank or unrecognised."
-	# ) # this is used to make sure that the data being added has the required attributes
+	# # this is used to make sure that the data being added has the required attributes
 
 	# @jwt_required() # makes this method require an access token, which is given during authentication (if you want this to apply to the other methods, you will need to give them this decorator too)
 	# def get(self, name):
