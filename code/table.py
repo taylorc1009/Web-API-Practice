@@ -7,6 +7,11 @@ cursor = connection.cursor()
 create_table = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username text, password text)" # 'INTEGER' key word creates an auto incrementing column: we want our IDs to auto increment for each new row
 cursor.execute(create_table)
 
+create_table = "CREATE TABLE IF NOT EXISTS items (name text, price real)" # 'INTEGER' key word creates an auto incrementing column: we want our IDs to auto increment for each new row
+cursor.execute(create_table)
+
+cursor.execute("INSERT INTO items VALUES ('test', 10.99)")
+
 # user = (1, 'jose', 'asdf')
 # insert_query = "INSERT INTO users VALUES (?, ?, ?)"
 # cursor.execute(insert_query, user)
