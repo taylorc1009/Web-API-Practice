@@ -2,20 +2,19 @@ from flask import Flask, jsonify # Section3(, jsonify, render_template)
 from flask_restful import Api
 from flask_jwt import JWT
 from security import authenticate, identity
-from user import UserRegister
-from item import Item, Items
+from resources.user import UserRegister
+from resources.item import Item, Items
 from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = 'example-key'
-app.config['JWT_AUTH_URL_RULE'] = '/login' # changes the authentication endpoint from '/auth' to '/login'
-app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800) # changes the JWT token time out from 5 minutes to half an hour
-# app.config['JWT_AUTH_USERNAME_KEY'] = 'email' # changes the authentication key name from 'username' to 'email'
+app.config['JWT_AUTH_URL_RULE'] = '/login'
+app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
 api = Api(app)
 
 jwt = JWT(app, authenticate, identity)
 
-@jwt.auth_response_handler # allows us to return more than just the 'access_token' from the '/auth'/'/login' endpoint
+@jwt.auth_response_handler
 def customized_response_handler(access_token, identity):
 	return jsonify({
 		'access_token': access_token.decode('utf-8'),
@@ -26,7 +25,7 @@ api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
 api.add_resource(UserRegister, '/register')
 
-if __name__ == '__main__': # prevents the server from starting if we're running 'app.py' by importing it
+if __name__ == '__main__':
 	app.run(port=5000, debug=True)
 
 

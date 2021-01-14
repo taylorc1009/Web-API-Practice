@@ -1,5 +1,5 @@
 from werkzeug.security import safe_str_cmp
-from user import User
+from resources.user import User
 
 def authenticate(username, password): # checks if the user entered the correct password for a username
     user = User.find_by_username(username)
