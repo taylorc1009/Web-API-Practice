@@ -36,6 +36,7 @@ if __name__ == '__main__': # prevents the server from starting if we're running 
 # # 202 = accepted (same as 201 but used to signify a delayed creation)
 # # 400 = bad request
 # # 404 = not found
+# # 500 = internal server error
 
 # class Item(Resource):
 	# parser = reqparse.RequestParser()
