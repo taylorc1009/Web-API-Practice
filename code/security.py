@@ -14,6 +14,20 @@ def identity(payload): # returns the user details, acquired by ID
 
 
 
+### Udemy Section 5
+# def authenticate(username, password): # checks if the user entered the correct password for a username
+    # user = User.find_by_username(username)
+    # if user and safe_str_cmp(user.password, password): # 'safe_str_cmp' is used to compare different character encodings simply: comparing ASCII with Unicode will cause issues
+        # return user
+
+# def identity(payload): # returns the user details, acquired by ID
+    # user_id = payload['identity']
+    # return User.find_by_id(user_id)
+
+
+
+
+
 ### Udemy Section 4
 # users = [
     # User(1, 'bob', 'asdf')

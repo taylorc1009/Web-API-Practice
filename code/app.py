@@ -22,29 +22,56 @@ def customized_response_handler(access_token, identity):
 		'user_id': identity.id
 	})
 
-# should allow you to handle JWT errors, but Python is saying that "'JWT' object has no attribute 'error_handler'"
-# @jwt.error_handler
-# def customized_error_handler(error):
-	# return jsonify({
-		# 'message': error.description,
-		# 'code': error.status_code
-	# }), error.status_code
-
-# can be used in the 'User' class to get a users' identity from the 'access_token'
-# from flask_jwt import jwt_required, current_identity
-# class User(Resource):
-	# @jwt_required()
-	# def get(self): # view all users
-	# user = current_identity
-	# # then implement admin auth method
-	# ...
-
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__': # prevents the server from starting if we're running 'app.py' by importing it
 	app.run(port=5000, debug=True)
+
+
+
+
+
+### Udemy Section 5
+# app.secret_key = 'example-key'
+# app.config['JWT_AUTH_URL_RULE'] = '/login' # changes the authentication endpoint from '/auth' to '/login'
+# app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800) # changes the JWT token time out from 5 minutes to half an hour
+# # app.config['JWT_AUTH_USERNAME_KEY'] = 'email' # changes the authentication key name from 'username' to 'email'
+# api = Api(app)
+
+# jwt = JWT(app, authenticate, identity)
+
+# @jwt.auth_response_handler # allows us to return more than just the 'access_token' from the '/auth'/'/login' endpoint
+# def customized_response_handler(access_token, identity):
+	# return jsonify({
+		# 'access_token': access_token.decode('utf-8'),
+		# 'user_id': identity.id
+	# })
+
+# # should allow you to handle JWT errors, but Python is saying that "'JWT' object has no attribute 'error_handler'"
+# # @jwt.error_handler
+# # def customized_error_handler(error):
+	# # return jsonify({
+		# # 'message': error.description,
+		# # 'code': error.status_code
+	# # }), error.status_code
+
+# # can be used in the 'User' class to get a users' identity from the 'access_token'
+# # from flask_jwt import jwt_required, current_identity
+# # class User(Resource):
+	# # @jwt_required()
+	# # def get(self): # view all users
+	# # user = current_identity
+	# # # then implement admin auth method
+	# # ...
+
+# api.add_resource(Item, '/item/<string:name>')
+# api.add_resource(Items, '/items')
+# api.add_resource(UserRegister, '/register')
+
+# if __name__ == '__main__': # prevents the server from starting if we're running 'app.py' by importing it
+	# app.run(port=5000, debug=True)
 
 
 
