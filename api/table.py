@@ -1,3 +1,5 @@
+# this is used to create the database and the tables; the database must be in the same directory where app.py is ran
+
 import sqlite3
 
 connection = sqlite3.connect('data.db') # creates a new file-based database - you must delete this every time you want to re-run the app or you'll get database errors such as "primary key exists"
