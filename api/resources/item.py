@@ -23,11 +23,11 @@ class Item(Resource):
         return {'message': 'Item not found.'}, 404
 
     def post(self, name):
-        # try:
-        if ItemModel.find_by_name(name): # we can't do "if self.get(name)" because the 'get' method required a JWT token, so the code to find the item had been moved to 'find_by_name'
-            return {'message': "An item with name '{}' already exists.".format(name)}, 400
-        # except:
-            # return {"message": "An error occurred while reading the item from the database."}, 500
+        try:
+            if ItemModel.find_by_name(name): # we can't do "if self.get(name)" because the 'get' method required a JWT token, so the code to find the item had been moved to 'find_by_name'
+                return {'message': "An item with name '{}' already exists.".format(name)}, 400
+        except:
+            return {"message": "An error occurred while reading the item from the database."}, 500
 
         request_data = Item.parser.parse_args()
 
@@ -41,7 +41,11 @@ class Item(Resource):
 
     def delete(self, name):
         try:
-            item = ItemModel.find_by_name(name)
+            try:
+                item = ItemModel.find_by_name(name)
+            except:
+                return {"message": "An error occurred while reading the item from the database."}, 500
+
             if item:
                 item.delete_from_database()
         except:
@@ -57,17 +61,18 @@ class Item(Resource):
             return {"message": "An error occurred while reading the item from the database."}, 500
 
         if item is None:
-            try:
-                item = ItemModel(name, request_data['price'])
-            except:
-                return {"message": "An error occurred while inserting the item to the database."}, 500
+            item = ItemModel(name, request_data['price'])
         else:
             try:
                 item.price = request_data['price']
             except:
                 return {"message": "An error occurred while updating the item in the database."}, 500
 
-        item.save_to_database()
+        try:
+            item.save_to_database()
+        except:
+            return {"message": "An error occurred while inserting the item to the database."}, 500
+
         return item.json(), 200
 
 class Items(Resource):
