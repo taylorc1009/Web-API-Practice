@@ -18,6 +18,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # disables Flasks' native t
 db.init_app(app)
 api = Api(app)
 
+@app.before_first_request # stop any app requests being made before this method is ran
+def create_tables():
+	db.create_all();
+
 jwt = JWT(app, authenticate, identity)
 
 @jwt.auth_response_handler
