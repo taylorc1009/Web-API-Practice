@@ -23,32 +23,27 @@ class Item(Resource):
         return {'message': 'Item not found.'}, 404
 
     def post(self, name):
-        try:
-            if ItemModel.find_by_name(name): # we can't do "if self.get(name)" because the 'get' method required a JWT token, so the code to find the item had been moved to 'find_by_name'
-                return {'message': "An item with name '{}' already exists.".format(name)}, 400
-        except:
-            return {"message": "An error occurred while reading the item from the database."}, 500
+        # try:
+        if ItemModel.find_by_name(name): # we can't do "if self.get(name)" because the 'get' method required a JWT token, so the code to find the item had been moved to 'find_by_name'
+            return {'message': "An item with name '{}' already exists.".format(name)}, 400
+        # except:
+            # return {"message": "An error occurred while reading the item from the database."}, 500
 
         request_data = Item.parser.parse_args()
 
         item = ItemModel(name, request_data['price'])
 
         try:
-            item.insert()
+            item.save_to_database()
         except:
             return {"message": "An error occurred while inserting the item to the database."}, 500
         return item.json(), 201
 
     def delete(self, name):
         try:
-            connection = sqlite3.connect('data.db')
-            cursor = connection.cursor()
-
-            query = "DELETE FROM items WHERE name=?"
-            cursor.execute(query, (name,))
-
-            connection.commit()
-            connection.close()
+            item = ItemModel.find_by_name(name)
+            if item:
+                item.delete_from_database()
         except:
             return {"message": "An error occurred while deleting the item from the database."}, 500
         return {'message': 'Item deleted.'}, 200
@@ -60,19 +55,20 @@ class Item(Resource):
             item = ItemModel.find_by_name(name)
         except:
             return {"message": "An error occurred while reading the item from the database."}, 500
-        updated_item = ItemModel(name, request_data['price'])
 
         if item is None:
             try:
-                updated_item.insert()
+                item = ItemModel(name, request_data['price'])
             except:
                 return {"message": "An error occurred while inserting the item to the database."}, 500
         else:
             try:
-                updated_item.update()
+                item.price = request_data['price']
             except:
                 return {"message": "An error occurred while updating the item in the database."}, 500
-        return updated_item.json(), 200
+
+        item.save_to_database()
+        return item.json(), 200
 
 class Items(Resource):
     def get(self):
