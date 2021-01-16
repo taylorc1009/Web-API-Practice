@@ -9,6 +9,11 @@ class Item(Resource):
         required=True,
         help="Field is either blank or unrecognised."
     )
+    parser.add_argument('store_id',
+        type=int,
+        required=True,
+        help="Field is either blank or unrecognised - items must have a store ID."
+    )
 
     @jwt_required()
     def get(self, name):
@@ -30,7 +35,7 @@ class Item(Resource):
 
         request_data = Item.parser.parse_args()
 
-        item = ItemModel(name, request_data['price'])
+        item = ItemModel(name, **request_data)
 
         try:
             item.save_to_database()
@@ -60,12 +65,10 @@ class Item(Resource):
             return {"message": "An error occurred while reading the item from the database."}, 500
 
         if item is None:
-            item = ItemModel(name, request_data['price'])
+            item = ItemModel(name, **request_data)
         else:
-            try:
-                item.price = request_data['price']
-            except:
-                return {"message": "An error occurred while updating the item in the database."}, 500
+            item.price = request_data['price']
+            item.store_id = request_data['store_id']
 
         try:
             item.save_to_database()

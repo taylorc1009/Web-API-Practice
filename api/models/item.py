@@ -7,9 +7,14 @@ class ItemModel(db.Model):
     name = db.Column(db.String(80))
     price = db.Column(db.Float(precision=2)) # 'precision' limits the number entered to 2 decimal places
 
-    def __init__(self, name, price):
+    # relationship with 'stores' table
+    store_id = db.Column(db.Integer, db.ForeignKey('stores.id')) # so we can say which store the item belongs too
+    store = db.relationship('StoreModel') # essentially, this is an SQLAlchemy way of performing a 'JOIN'
+
+    def __init__(self, name, price, store_id):
         self.name = name
         self.price = price
+        self.store_id = store_id
 
     def json(self):
         return {'name': self.name, 'price': self.price}
