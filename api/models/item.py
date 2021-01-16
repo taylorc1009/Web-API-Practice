@@ -19,11 +19,11 @@ class ItemModel(db.Model):
         return {'name': self.name, 'price': self.price, 'store_id': self.store_id}
 
     @classmethod
-    def find_item_in_store(cls, name, store_id):
+    def find_item_in_store(cls, item_name, store_id): # allows us to determine whether or not a specific item exists within a specific store
         from models.store import StoreModel
         store = StoreModel.query.filter_by(id=store_id).first()
         if store:
-            return store.items.filter_by(name=name).first()
+            return store.items.filter_by(name=item_name).first()
 
     def save_to_database(self):
         db.session.add(self)
