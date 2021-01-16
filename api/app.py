@@ -1,9 +1,12 @@
 from flask import Flask, jsonify # Section3(, jsonify, render_template)
 from flask_restful import Api
 from flask_jwt import JWT
+
 from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, Items
+from resources.store import Store, Stores
+
 from datetime import timedelta
 from db import db
 
@@ -20,7 +23,7 @@ api = Api(app)
 
 @app.before_first_request # stop any app requests being made before this method is ran
 def create_tables():
-	db.create_all();
+	db.create_all(); # SQLAlchemy will only create the tables it sees, for example: 'app.py' imports 'resources.store' and 'resources.store' imports 'models.store', this is where it finds the 'stores' table as it is in 'StoreModel' of 'store.py'
 
 jwt = JWT(app, authenticate, identity)
 
@@ -33,6 +36,8 @@ def customized_response_handler(access_token, identity):
 
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
+api.add_resource(Store, '/store/<string:name>')
+api.add_resource(Stores, '/stores')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':

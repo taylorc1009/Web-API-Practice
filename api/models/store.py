@@ -10,9 +10,8 @@ class StoreModel(db.Model):
     items = db.relationship('ItemModel', lazy='dynamic') # SQLAlchemy looks in the 'ItemModel' class and, because we have a relationship to this class in there, finds the relationship
     # notice the 'lazy' parameter - this prevents the creation of a StoreModel automatically building an object for each item in the store as, if we have a lot of items, this becomes an expensive operation (now, look at the 'json()' method here)
 
-    def __init__(self, name, price):
+    def __init__(self, name):
         self.name = name
-        self.price = price
 
     def json(self):
         return {'name': self.name, 'items': [item.json() for item in self.items.all()]} # 'items.all()' queries all of the 'items' from the table - this way we don't need to load all of the items as objects during initialisation and we can just query the database when we need them instead
