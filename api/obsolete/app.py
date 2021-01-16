@@ -51,7 +51,7 @@
 # items = []
 
 # # HTML responses
-# # 200 = request ok
+# # 200 = request ok (in Flask, we dont need to return this because Flask returns it, by default, when a request ends)
 # # 201 = object created
 # # 202 = accepted (same as 201 but used to signify a delayed creation)
 # # 400 = bad request

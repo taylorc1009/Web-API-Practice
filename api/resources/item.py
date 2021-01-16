@@ -24,7 +24,7 @@ class Item(Resource):
             return {"message": "An error occurred while reading the item from the database."}, 500
 
         if item:
-            return item.json(), 200
+            return item.json()
         return {'message': 'Item not found.'}, 404
 
     def post(self, name):
@@ -55,7 +55,7 @@ class Item(Resource):
                 item.delete_from_database()
         except:
             return {"message": "An error occurred while deleting the item from the database."}, 500
-        return {'message': 'Item deleted.'}, 200
+        return {'message': 'Item deleted.'}
 
     def put(self, name):
         request_data = Item.parser.parse_args()
@@ -76,7 +76,7 @@ class Item(Resource):
         except:
             return {"message": "An error occurred while inserting the item to the database."}, 500
 
-        return item.json(), 200
+        return item.json()
 
 class Items(Resource): # used to 'GET' a list of all items
     def get(self):
