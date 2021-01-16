@@ -3,7 +3,8 @@ from flask_jwt import jwt_required
 from models.item import ItemModel
 
 class Item(Resource):
-    parser = reqparse.RequestParser()
+    parser = reqparse.RequestParser() # parses the JSON data recieved in the request (it isn't defined here, Flask will find it automatically)
+    # request arguments that are expected for the 'ItemModel'
     parser.add_argument('price',
         type=float,
         required=True,
