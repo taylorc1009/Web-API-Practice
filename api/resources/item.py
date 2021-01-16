@@ -78,6 +78,6 @@ class Item(Resource):
 
         return item.json(), 200
 
-class Items(Resource):
+class Items(Resource): # used to 'GET' a list of all items
     def get(self):
         return {'items': [item.json() for item in ItemModel.query.all()]} # instead of list comprehension, you can also use 'list(map(lambda x: x.json(), ItemModel.query.all()))' (usually used when you need to interact with other languages as, notice how we use the 'map()' conversion, we can convert it to other data types)
