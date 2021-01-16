@@ -7,12 +7,12 @@ class UserRegister(Resource):
     parser.add_argument('username',
         type=str,
         required=True,
-        help="Field is either blank or unrecognised."
+        help="Field cannot be blank - you need a username to login."
     )
     parser.add_argument('password',
         type=str,
         required=True,
-        help="Field is either blank or unrecognised."
+        help="Field cannot be blank - you must have a password to allow access to this user."
     )
 
     def post(self):
