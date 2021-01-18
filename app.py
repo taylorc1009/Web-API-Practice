@@ -1,14 +1,14 @@
-from flask import Flask, jsonify # Section3(, jsonify, render_template)
+from flask import Flask, jsonify, render_template
 from flask_restful import Api
 from flask_jwt import JWT
 
-from api.security import authenticate, identity
-from api.resources.user import UserRegister
-from api.resources.item import Item, Items
-from api.resources.store import Store, Stores
+from security import authenticate, identity
+from resources.user import UserRegister
+from resources.item import Item, Items
+from resources.store import Store, Stores
 
 from datetime import timedelta
-from api.db import db
+from db import db
 
 app = Flask(__name__)
 app.secret_key = 'example-key'
@@ -33,6 +33,10 @@ def customized_response_handler(access_token, identity):
 		'access_token': access_token.decode('utf-8'),
 		'user_id': identity.id
 	})
+
+@app.route("/")
+def home():
+	return render_template("lab.html")
 
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(Items, '/items')
