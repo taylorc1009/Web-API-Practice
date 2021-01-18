@@ -1,4 +1,4 @@
-from db import db
+from api.db import db
 
 class StoreModel(db.Model):
     # SQLAlchemy attributes; look at 'user.py' for the implementation descriptions

@@ -8,7 +8,7 @@ from api.resources.item import Item, Items
 from api.resources.store import Store, Stores
 
 from datetime import timedelta
-from db import db
+from api.db import db
 
 app = Flask(__name__)
 app.secret_key = 'example-key'
