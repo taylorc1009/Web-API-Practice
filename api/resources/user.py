@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from models.user import UserModel
+from api.models.user import UserModel
 
 class UserRegister(Resource):
     parser = reqparse.RequestParser() # parses the JSON data recieved in the request (it isn't defined here, Flask will find it automatically)
