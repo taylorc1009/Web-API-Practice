@@ -2,10 +2,10 @@ from flask import Flask, jsonify # Section3(, jsonify, render_template)
 from flask_restful import Api
 from flask_jwt import JWT
 
-from security import authenticate, identity
-from resources.user import UserRegister
-from resources.item import Item, Items
-from resources.store import Store, Stores
+from api.security import authenticate, identity
+from api.resources.user import UserRegister
+from api.resources.item import Item, Items
+from api.resources.store import Store, Stores
 
 from datetime import timedelta
 from db import db
