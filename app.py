@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify, render_template
 from flask_restful import Api
 from flask_jwt import JWT
@@ -15,7 +17,7 @@ app.secret_key = 'example-key'
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' # tells SQLAlchemy that the database exists at the root folder of the project and that we're using SQLite (SQLAlchemy is interchangeable between database solutions which allows us to change solution, using this name, without changing any other line of code)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') # try to load the 'DATABASE_URL' variable, if it fails then revert back to the SQLite implementation
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # disables Flasks' native tracker but not SQLAlchemys': tracking twice would use more resources
 
 db.init_app(app)
