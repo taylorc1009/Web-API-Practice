@@ -1,0 +1,1 @@
+This directory is for working with the web page design. I would like to leave the working Python template rendering alone while I work on the design, but doing so, locally, with the original files would mean I'd need to run the local server during every test.
