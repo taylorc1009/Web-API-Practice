@@ -8,7 +8,7 @@
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.send(null);
-}*/
+}*
 
 function getDateTime() {
 	var dateTime = Date();
@@ -96,3 +96,4 @@ function removeValue(name, storage) {
 		return false;
 	}
 }
+*/
