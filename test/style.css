@@ -12,7 +12,7 @@ body > #page-bg {
 	position: fixed;
 	z-index: -1;
 
-	background-image: linear-gradient(to right, rgb(0, 137, 255), rgb(2, 211, 248));
+	background-image: linear-gradient(to right, rgb(0, 112, 255), rgb(2, 211, 248));
 	clip-path: polygon(0 0, 100% 0, 100% 35%, 0 65%);
 }
 .page-grid {
@@ -55,20 +55,20 @@ body > #page-bg {
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 50px;
-	padding-top: 130px;
+	padding-top: 100px;
 	padding-bottom: 600px;
 
-	font-size: 100;
-  font-size: 4vw; /* adjusts the font size with the page */
+	font-size: 50px;
+  font-size: 6vw; /* adjusts the font size with the page */
 	color: white;
 	text-align: left;
 	font-family: Arial, Helvetica, sans-serif;
 }
 #logo {
-	display: inline-block;
+	display: block; /* tried using 'inline-block' to fix the minimum width */
 	margin-top: 0;
 	max-width: 75%;
-	min-width: 40%;
+	/* min-width: 40%; <-- doesn't work */
   width: auto;
 	float: right;
 }
