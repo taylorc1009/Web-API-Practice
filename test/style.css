@@ -1,7 +1,7 @@
 body {
 	padding: 0;
 	margin: 0;
-	/* background-color: black; */
+	/* background-color: rgb(50, 50, 50); */
 }
 body > #page-bg {
 	padding: 0;
@@ -9,7 +9,7 @@ body > #page-bg {
 	height: 100%;
 	width: 100%;
 	background-image: linear-gradient(to right, rgb(0, 137, 255), rgb(2, 211, 248));
-	clip-path: polygon(0 0, 100% 0, 100% 44%, 0 71%);
+	clip-path: polygon(0 0, 100% 0, 100% 35%, 0 65%);
 	position: fixed;
 	z-index: -1;
 }
@@ -24,29 +24,41 @@ body > #page-bg {
 	padding: 20px;
 }
 
+/*.page-grid-item3 {
+	grid-column-start: 1;
+	grid-column-end: 3;
+}*/
+
 .body-card {
 	background-color: white;
 	border-radius: 15px;
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
-.body-card:first-child {
+.body-card * {
+	padding: 10px;
+}
+/*.body-card:first-child {
 	padding-top: 10px;
 }
-.body-card * {
+.body-card > section {
 	padding-left: 10px;
 	padding-right: 10px;
 }
 .body-card:last-child {
 	padding-bottom: 10px;
-}
+}*/
 
 #title {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	font-size: 100px;
+	padding-left: 50px;
+	padding-top: 130px;
+	padding-bottom: 600px;
+	font-size: 100;
+  font-size: 4vw;
 	color: white;
-	text-align: center;
+	text-align: left;
 	font-family: Arial, Helvetica, sans-serif;
 }
 #logo {
@@ -59,7 +71,7 @@ body > #page-bg {
 }
 #introduction {
 	font-size: larger;
-	text-align: center;
+	text-align: left;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
