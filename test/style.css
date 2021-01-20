@@ -1,30 +1,74 @@
 body {
-	background-color: black;
+	padding: 0;
+	margin: 0;
+	/* background-color: black; */
 }
+body > #page-bg {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	background-image: linear-gradient(to right, rgb(0, 137, 255), rgb(2, 211, 248));
+	clip-path: polygon(0 0, 100% 0, 100% 44%, 0 71%);
+	position: fixed;
+	z-index: -1;
+}
+.page-grid {
+	display: grid;
+	grid-template-columns: 80% 20%;
+	grid-gap: 10px;
+	padding: 10px;
+}
+.page-grid > div { /* CSS selector ‘>’ selects all the direct descendents (children) of the class that the style is applied to */
+	text-align: center;
+	padding: 20px;
+}
+
+.body-card {
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+.body-card:first-child {
+	padding-top: 10px;
+}
+.body-card * {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.body-card:last-child {
+	padding-bottom: 10px;
+}
+
 #title {
-	color: tomato;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 100px;
+	color: white;
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 }
 #logo {
-	/* centres the image */
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
-
-	/* dynamically resizes the image */
-	max-width: 100%;
-    height: auto;
-    width: auto;
+	margin-top: 0;
+	float: right;
+	max-width: 75%;
+  height: auto;
+  width: auto;
 }
 #introduction {
-	color: white;
 	font-size: larger;
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+
+
+
 #datetime {
-	color: white;
 	font-family: Arial, Helvetica, sans-serif;
 }
 .flex-container {
@@ -41,7 +85,7 @@ body {
 	width: 200px;
 	height: 150px;
 	margin-top: 10px;
-	
+
 	line-height: 150px;
 	color: white;
 	font-weight: bold;
